@@ -1,0 +1,35 @@
+{
+    "name": "crthiago/laravel-service-generator",
+    "description": "Service Generator",
+    "minimum-stability": "dev",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Thiago Rodrigues Costa",
+            "email": "email@example.com"
+        }
+    ],
+    "require": {
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.0",
+        "nunomaduro/phpinsights": "^v2.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "Crthiago\\LaravelServiceGenerator\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Crthiago\\LaravelServiceGenerator\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Crthiago\\LaravelServiceGenerator\\ServiceGeneratorProvider"
+            ]
+        }
+    }
+}
