@@ -2,6 +2,7 @@
 
 namespace Crthiago\LaravelServiceGenerator;
 
+use Crthiago\LaravelServiceGenerator\Commands\MakeActionCommand;
 use Crthiago\LaravelServiceGenerator\Commands\MakeServiceCommand;
 use Illuminate\Support\ServiceProvider;
 
@@ -29,6 +30,7 @@ class ServiceGeneratorProvider extends ServiceProvider
 
             $this->commands([
                 MakeServiceCommand::class,
+                MakeActionCommand::class,
             ]);
         }
     }
