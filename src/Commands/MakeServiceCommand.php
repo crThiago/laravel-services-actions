@@ -42,7 +42,7 @@ class MakeServiceCommand extends Command
 
         $modelName = str_replace(['Services', 'services', 'Service', 'service'], '', ucfirst($this->argument('model')));
         $this->info('Creating service for ' . $modelName . ' model...');
-        if (! class_exists('App\\Models\\' . $modelName)) {
+        if ($fileSystem->missing(app_path('Models/' . $modelName . '.php'))) {
             $this->error('Model not found!');
             return Command::FAILURE;
         }
@@ -57,6 +57,7 @@ class MakeServiceCommand extends Command
             view('service-generator::service', ['model' => $modelName])->render()
         );
 
+        $this->info('Service created successfully.');
         return Command::SUCCESS;
     }
 }
