@@ -1,12 +1,11 @@
 {
-    "name": "crthiago/laravel-service-generator",
-    "description": "Service Generator",
+    "name": "crthiago/laravel-services-actions",
+    "description": "This package is designed to help developers generate the Services and Actions layer in their Laravel applications.\nIt provides a set of commands to generate the necessary files and folders, as well as a template for the Service and Action classes.",
     "minimum-stability": "dev",
     "license": "MIT",
     "authors": [
         {
-            "name": "Thiago Rodrigues Costa",
-            "email": "email@example.com"
+            "name": "Thiago Rodrigues Costa"
         }
     ],
     "require": {
@@ -17,18 +16,18 @@
     },
     "autoload": {
         "psr-4": {
-            "Crthiago\\LaravelServiceGenerator\\": "src/"
+            "Crthiago\\LaravelServicesActions\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Crthiago\\LaravelServiceGenerator\\Tests\\": "tests/"
+            "Crthiago\\LaravelServicesActions\\Tests\\": "tests/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Crthiago\\LaravelServiceGenerator\\ServiceGeneratorProvider"
+                "Crthiago\\LaravelServicesActions\\ServicesActionsProvider"
             ]
         }
     },

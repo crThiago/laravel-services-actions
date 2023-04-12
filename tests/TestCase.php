@@ -1,16 +1,16 @@
 <?php
 
-namespace Crthiago\LaravelServiceGenerator\Tests;
+namespace Crthiago\LaravelServicesActions\Tests;
 
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
-use Crthiago\LaravelServiceGenerator\ServiceGeneratorProvider;
+use Crthiago\LaravelServicesActions\ServicesActionsProvider;
 
 class TestCase extends OrchestraTestCase
 {
     protected function getPackageProviders($app)
     {
         return [
-            ServiceGeneratorProvider::class,
+            ServicesActionsProvider::class,
         ];
     }
 }

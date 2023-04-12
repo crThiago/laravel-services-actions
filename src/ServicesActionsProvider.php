@@ -1,12 +1,12 @@
 <?php
 
-namespace Crthiago\LaravelServiceGenerator;
+namespace Crthiago\LaravelServicesActions;
 
-use Crthiago\LaravelServiceGenerator\Commands\MakeActionCommand;
-use Crthiago\LaravelServiceGenerator\Commands\MakeServiceCommand;
+use Crthiago\LaravelServicesActions\Commands\MakeActionCommand;
+use Crthiago\LaravelServicesActions\Commands\MakeServiceCommand;
 use Illuminate\Support\ServiceProvider;
 
-class ServiceGeneratorProvider extends ServiceProvider
+class ServicesActionsProvider extends ServiceProvider
 {
     /**
      * Register services.
@@ -21,12 +21,12 @@ class ServiceGeneratorProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->loadViewsFrom(__DIR__ . '/../stubs', 'service-generator');
+        $this->loadViewsFrom(__DIR__ . '/../stubs', 'services-actions-views');
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__ . '/../config/service-generator.php' => config_path('service-generator.php'),
-            ], 'service-generator-config');
+                __DIR__ . '/../config/services-actions.php' => config_path('services-actions.php'),
+            ], 'services-actions-config');
 
             $this->commands([
                 MakeServiceCommand::class,

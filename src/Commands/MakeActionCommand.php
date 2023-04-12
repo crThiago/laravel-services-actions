@@ -1,11 +1,9 @@
 <?php
 
-namespace Crthiago\LaravelServiceGenerator\Commands;
+namespace Crthiago\LaravelServicesActions\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Support\Str;
 
 class MakeActionCommand extends Command
 {
@@ -32,7 +30,7 @@ class MakeActionCommand extends Command
         $this->info('Creating action called ' . $actionName . '...');
 
         $fileSystem = new Filesystem();
-        $actionPath = config('service-generator.path.action');
+        $actionPath = config('services-actions.path.action');
         if ($fileSystem->exists($actionPath . '/' . $actionName . 'Action.php')) {
             $this->error('Action already exists!');
             return Command::FAILURE;
@@ -45,12 +43,12 @@ class MakeActionCommand extends Command
         $fileSystem->put(
             $actionPath . '/' . $actionName . 'Action.php',
             view(
-                'service-generator::action',
+                'services-actions-views::action',
                 [
                     'action' => [
-                        'namespace' => config('service-generator.namespace.action'),
+                        'namespace' => config('services-actions.namespace.action'),
                         'name' => $actionName,
-                        'method' => config('service-generator.action_method'),
+                        'method' => config('services-actions.action_method'),
                     ]
                 ]
             )->render()

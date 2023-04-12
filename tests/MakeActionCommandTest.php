@@ -1,21 +1,21 @@
 <?php
 
-namespace Crthiago\LaravelServiceGenerator\Tests;
+namespace Crthiago\LaravelServicesActions\Tests;
 
 class MakeActionCommandTest extends TestCase
 {
     protected function defaultConfig($app)
     {
-        $app['config']->set('service-generator.path.action', app_path('Actions'));
-        $app['config']->set('service-generator.namespace.action', 'App\Actions');
-        $app['config']->set('service-generator.action_method', 'handle');
+        $app['config']->set('services-actions.path.action', app_path('Actions'));
+        $app['config']->set('services-actions.namespace.action', 'App\Actions');
+        $app['config']->set('services-actions.action_method', 'handle');
     }
 
     protected function customConfig($app)
     {
-        $app['config']->set('service-generator.path.action', app_path('Parent/Actions'));
-        $app['config']->set('service-generator.namespace.action', 'App\Parent\Actions');
-        $app['config']->set('service-generator.action_method', 'execute');
+        $app['config']->set('services-actions.path.action', app_path('Parent/Actions'));
+        $app['config']->set('services-actions.namespace.action', 'App\Parent\Actions');
+        $app['config']->set('services-actions.action_method', 'execute');
     }
 
     /**

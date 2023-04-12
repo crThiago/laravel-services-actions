@@ -1,11 +1,9 @@
 <?php
 
-namespace Crthiago\LaravelServiceGenerator\Commands;
+namespace Crthiago\LaravelServicesActions\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Support\Str;
 
 class MakeServiceCommand extends Command
 {
@@ -29,22 +27,21 @@ class MakeServiceCommand extends Command
     public function handle()
     {
         $fileSystem = new Filesystem();
-        $servicePath = config('service-generator.path.service');
-        $serviceNamespace = config('service-generator.namespace.service');
+        $servicePath = config('services-actions.path.service');
+        $serviceNamespace = config('services-actions.namespace.service');
         if (! $fileSystem->exists($servicePath . '/BaseService.php')) {
             if (! $fileSystem->exists($servicePath)) {
                 $fileSystem->makeDirectory($servicePath , 0755, true);
             }
             $fileSystem->put(
                 $servicePath . '/BaseService.php',
-                view('service-generator::base_service', ['namespace' => $serviceNamespace])->render()
+                view('services-actions-views::base_service', ['namespace' => $serviceNamespace])->render()
             );
         }
 
-
         $modelName = str_replace(['Services', 'services', 'Service', 'service'], '', ucfirst($this->argument('model')));
         $this->info('Creating service for ' . $modelName . ' model...');
-        $modelPath = config('service-generator.path.model');
+        $modelPath = config('services-actions.path.model');
         if ($fileSystem->missing($modelPath . '/' . $modelName . '.php')) {
             $this->error('Model not found!');
             return Command::FAILURE;
@@ -58,12 +55,12 @@ class MakeServiceCommand extends Command
         $fileSystem->put(
             $servicePath . '/' . $modelName . 'Service.php',
             view(
-                'service-generator::service',
+                'services-actions-views::service',
                 [
                     'service' => [
                         'namespace' => $serviceNamespace,
                         'model' => $modelName,
-                        'model_namespace' => config('service-generator.namespace.model'),
+                        'model_namespace' => config('services-actions.namespace.model'),
                     ]
                 ]
             )->render()

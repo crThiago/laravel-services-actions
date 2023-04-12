@@ -1,6 +1,6 @@
 <?php
 
-namespace Crthiago\LaravelServiceGenerator\Tests;
+namespace Crthiago\LaravelServicesActions\Tests;
 
 class MakeServiceCommandTest extends TestCase
 {
@@ -12,20 +12,20 @@ class MakeServiceCommandTest extends TestCase
 
     protected function defineEnvironment($app)
     {
-        $app['config']->set('service-generator.path.model', app_path('Models'));
-        $app['config']->set('service-generator.namespace.model', 'App\Models');
+        $app['config']->set('services-actions.path.model', app_path('Models'));
+        $app['config']->set('services-actions.namespace.model', 'App\Models');
     }
 
     protected function defaultConfig($app)
     {
-        $app['config']->set('service-generator.path.service', app_path('Services'));
-        $app['config']->set('service-generator.namespace.service', 'App\Services');
+        $app['config']->set('services-actions.path.service', app_path('Services'));
+        $app['config']->set('services-actions.namespace.service', 'App\Services');
     }
 
     protected function customConfig($app)
     {
-        $app['config']->set('service-generator.path.service', app_path('Parent/Services'));
-        $app['config']->set('service-generator.namespace.service', 'App\Parent\Services');
+        $app['config']->set('services-actions.path.service', app_path('Parent/Services'));
+        $app['config']->set('services-actions.namespace.service', 'App\Parent\Services');
     }
 
     /**
