@@ -13,7 +13,7 @@ composer require --dev crthiago/laravel-services-actions
 ## Configuration
 To publish the configuration file, run the following command:
 ```bash
-php artisan vendor:publish --provider="services-actions-config"
+php artisan vendor:publish --provider="Crthiago\LaravelServicesActions\ServicesActionsProvider"
 ```
 
 ## Usage
