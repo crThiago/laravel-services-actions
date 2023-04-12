@@ -5,7 +5,7 @@ namespace Crthiago\LaravelServicesActions\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 
-class MakeServiceCommand extends Command
+final class MakeServiceCommand extends Command
 {
     /**
      * The name and signature of the console command.
@@ -24,14 +24,14 @@ class MakeServiceCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): int
     {
         $fileSystem = new Filesystem();
         $servicePath = config('services-actions.path.service');
         $serviceNamespace = config('services-actions.namespace.service');
         if (! $fileSystem->exists($servicePath . '/BaseService.php')) {
             if (! $fileSystem->exists($servicePath)) {
-                $fileSystem->makeDirectory($servicePath , 0755, true);
+                $fileSystem->makeDirectory($servicePath, 0755, true);
             }
             $fileSystem->put(
                 $servicePath . '/BaseService.php',
@@ -61,7 +61,7 @@ class MakeServiceCommand extends Command
                         'namespace' => $serviceNamespace,
                         'model' => $modelName,
                         'model_namespace' => config('services-actions.namespace.model'),
-                    ]
+                    ],
                 ]
             )->render()
         );

@@ -6,16 +6,8 @@ use Crthiago\LaravelServicesActions\Commands\MakeActionCommand;
 use Crthiago\LaravelServicesActions\Commands\MakeServiceCommand;
 use Illuminate\Support\ServiceProvider;
 
-class ServicesActionsProvider extends ServiceProvider
+final class ServicesActionsProvider extends ServiceProvider
 {
-    /**
-     * Register services.
-     */
-    public function register(): void
-    {
-        //
-    }
-
     /**
      * Bootstrap services.
      */

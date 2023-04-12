@@ -5,7 +5,7 @@ namespace Crthiago\LaravelServicesActions\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 
-class MakeActionCommand extends Command
+final class MakeActionCommand extends Command
 {
     /**
      * The name and signature of the console command.
@@ -24,7 +24,7 @@ class MakeActionCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): int
     {
         $actionName = str_replace(['Actions', 'actions', 'Action', 'action'], '', ucfirst($this->argument('name')));
         $this->info('Creating action called ' . $actionName . '...');
@@ -37,7 +37,7 @@ class MakeActionCommand extends Command
         }
 
         if ($fileSystem->missing($actionPath)) {
-            $fileSystem->makeDirectory($actionPath , 0755, true);
+            $fileSystem->makeDirectory($actionPath, 0755, true);
         }
 
         $fileSystem->put(
@@ -49,7 +49,7 @@ class MakeActionCommand extends Command
                         'namespace' => config('services-actions.namespace.action'),
                         'name' => $actionName,
                         'method' => config('services-actions.action_method'),
-                    ]
+                    ],
                 ]
             )->render()
         );
