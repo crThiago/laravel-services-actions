@@ -2,9 +2,7 @@
     echo "<?php" . PHP_EOL;
 @endphp
 
-namespace App\Services;
-
-use Illuminate\Database\Eloquent\Model;
+namespace {{ $namespace }};
 
 abstract class BaseService
 {

@@ -2,15 +2,15 @@
     echo "<?php" . PHP_EOL;
 @endphp
 
-namespace App\Services;
+namespace {{ $service['namespace'] }};
 
-use App\Models\{{ $model }};
+use {{ $service['model_namespace'] }}\{{ $service['model'] }};
 
-class {{ $model }}Service extends BaseService
+class {{ $service['model'] }}Service extends BaseService
 {
     public function __construct()
     {
-        $this->model = {{ $model }}::class;
+        $this->model = {{ $service['model'] }}::class;
         // $this->columns = ['*'];
     }
 }

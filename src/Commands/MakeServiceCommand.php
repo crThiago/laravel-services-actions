@@ -29,32 +29,44 @@ class MakeServiceCommand extends Command
     public function handle()
     {
         $fileSystem = new Filesystem();
-        if (! $fileSystem->exists(app_path('Services/BaseService.php'))) {
-            if (! $fileSystem->exists(app_path('Services'))) {
-                $fileSystem->makeDirectory(app_path('Services'));
+        $servicePath = config('service-generator.path.service');
+        $serviceNamespace = config('service-generator.namespace.service');
+        if (! $fileSystem->exists($servicePath . '/BaseService.php')) {
+            if (! $fileSystem->exists($servicePath)) {
+                $fileSystem->makeDirectory($servicePath , 0755, true);
             }
             $fileSystem->put(
-                app_path('Services/BaseService.php'),
-                view('service-generator::base_service')->render()
+                $servicePath . '/BaseService.php',
+                view('service-generator::base_service', ['namespace' => $serviceNamespace])->render()
             );
         }
 
 
         $modelName = str_replace(['Services', 'services', 'Service', 'service'], '', ucfirst($this->argument('model')));
         $this->info('Creating service for ' . $modelName . ' model...');
-        if ($fileSystem->missing(app_path('Models/' . $modelName . '.php'))) {
+        $modelPath = config('service-generator.path.model');
+        if ($fileSystem->missing($modelPath . '/' . $modelName . '.php')) {
             $this->error('Model not found!');
             return Command::FAILURE;
         }
 
-        if ($fileSystem->exists(app_path('Services/' . $modelName . 'Service.php'))) {
+        if ($fileSystem->exists($servicePath . '/' . $modelName . 'Service.php')) {
             $this->error('Service already exists!');
             return Command::FAILURE;
         }
 
         $fileSystem->put(
-            app_path('Services/' . $modelName . 'Service.php'),
-            view('service-generator::service', ['model' => $modelName])->render()
+            $servicePath . '/' . $modelName . 'Service.php',
+            view(
+                'service-generator::service',
+                [
+                    'service' => [
+                        'namespace' => $serviceNamespace,
+                        'model' => $modelName,
+                        'model_namespace' => config('service-generator.namespace.model'),
+                    ]
+                ]
+            )->render()
         );
 
         $this->info('Service created successfully.');
