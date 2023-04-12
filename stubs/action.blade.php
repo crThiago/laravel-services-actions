@@ -2,11 +2,11 @@
     echo "<?php" . PHP_EOL;
 @endphp
 
-namespace App\Actions;
+namespace {{ $action['namespace'] }};
 
-class {{ $name }}Action
+class {{ $action['name'] }}Action
 {
-    public static function handle()
+    public static function {{ $action['method'] }}()
     {
         // todo implement
     }

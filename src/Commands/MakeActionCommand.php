@@ -32,18 +32,28 @@ class MakeActionCommand extends Command
         $this->info('Creating action called ' . $actionName . '...');
 
         $fileSystem = new Filesystem();
-        if ($fileSystem->exists(app_path('Actions/' . $actionName . 'Action.php'))) {
+        $actionPath = config('service-generator.path.action');
+        if ($fileSystem->exists($actionPath . '/' . $actionName . 'Action.php')) {
             $this->error('Action already exists!');
             return Command::FAILURE;
         }
 
-        if ($fileSystem->missing(app_path('Actions'))) {
-            $fileSystem->makeDirectory(app_path('Actions'));
+        if ($fileSystem->missing($actionPath)) {
+            $fileSystem->makeDirectory($actionPath , 0755, true);
         }
 
         $fileSystem->put(
-            app_path('Actions/' . $actionName . 'Action.php'),
-            view('service-generator::action', ['name' => $actionName])->render()
+            $actionPath . '/' . $actionName . 'Action.php',
+            view(
+                'service-generator::action',
+                [
+                    'action' => [
+                        'namespace' => config('service-generator.namespace.action'),
+                        'name' => $actionName,
+                        'method' => config('service-generator.action_method'),
+                    ]
+                ]
+            )->render()
         );
 
         $this->info('Action created successfully.');
